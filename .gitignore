@@ -10,3 +10,7 @@ dist/custom_gameclock-0.0.1.tar.gz
 dist/gameclock-0.0.1-py3-none-any.whl
 dist/gameclock-0.0.1.tar.gz
 build/lib/custom_gameclock/__init__.py
+src/custom_gameclock.egg-info/dependency_links.txt
+src/custom_gameclock.egg-info/top_level.txt
+src/custom_gameclock.egg-info/SOURCES.txt
+src/custom_gameclock.egg-info/PKG-INFO
