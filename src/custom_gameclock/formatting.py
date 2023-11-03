@@ -148,9 +148,9 @@ class CalendarFormatting():
     '''
     This class is a container for the constants the clock uses.
 
-    We make custom calendar names with the packaged enums `gameclock.Days` and
-    `gameclock.Months`, along with a dictionary of basic constant values in 
-    the same structure as the `gameclock.CalendarLimits` TypedDict. This class
+    We make custom calendar names with the packaged enums ``gameclock.Days`` and
+    ``gameclock.Months``, along with a dictionary of basic constant values in 
+    the same structure as the ``gameclock.CalendarLimits`` TypedDict. This class
     does a little bit of validation to make sure that the basic constants of
     the calendar are not contradictory in some way.
 

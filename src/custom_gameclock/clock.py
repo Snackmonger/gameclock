@@ -23,7 +23,7 @@ class GameClock:
     Parameters
     ----------
     calendar_constants : CalendarFormatting
-        A properly-formatted instance of `gameclock.CalendarFormatting` 
+        A properly-formatted instance of ``gameclock.CalendarFormatting``
         (see that class' doc for more details).
 
     starting_time : CalendarTimestamp

@@ -10,11 +10,11 @@ class EnumSequenceMixin(Enum):
     '''
     Mixin to allow a user to sequence the values of an enum.
 
-    This class is used as a parent class along with an `IntEnum` or `StrEnum` 
+    This class is used as a parent class along with an ``IntEnum`` or ``StrEnum`` 
     in order to add methods that allow us to get the next or previous value
     of an enum in a circular or linear order. 
     
-    Use `enum.auto` to define the values. The order of values in the enum
+    Use ``enum.auto`` to define the values. The order of values in the enum
     is the definition order. 
 
     Examples
