@@ -1,0 +1,3 @@
+from src.custom_gameclock import GameClock
+x = GameClock()
+print(x.prettytime)

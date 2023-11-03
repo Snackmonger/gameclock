@@ -22,12 +22,14 @@ class GameClock:
 
     Parameters
     ----------
-    calendar_constants : CalendarFormatting
+    calendar_formatting : CalendarFormatting, optional
         A properly-formatted instance of ``gameclock.CalendarFormatting``
-        (see that class' doc for more details).
+        (see that class' doc for more details). If not specified, the English
+        Gregorian calendar will be used.
 
-    starting_time : CalendarTimestamp
-        The time at which the clock will start.
+    starting_time : CalendarTimestamp, optional
+        The time at which the clock will start. If not specified, the default
+        starting time will be used.
 
     Methods
     -------
@@ -70,7 +72,7 @@ class GameClock:
     # /----------------------------------------------------------------------/
 
     def __init__(self,
-                 calendar_constants: CalendarFormatting | None = None,
+                 calendar_formatting: CalendarFormatting | None = None,
                  starting_time: CalendarTimestamp | None = None
                  ):
 
@@ -86,7 +88,7 @@ class GameClock:
 
         # Formatting constants: allows for custom date ranges.
         # The clock cannot do anything without the formatting being set first.
-        self.__constants: CalendarFormatting = calendar_constants or DEFAULT_FORMATTING
+        self.__constants: CalendarFormatting = calendar_formatting or DEFAULT_FORMATTING
 
         # Validate and set the starting time of the clock.
         time: CalendarTimestamp = starting_time or self.default_time
@@ -95,27 +97,6 @@ class GameClock:
             raise TimestampError(
                 f'Timestamp {time} is incompatible with the given formatting.')
         self.set_time(time)
-
-
-    # @classmethod
-    # def default_clock(cls) -> 'GameClock':
-    #     '''
-    #     Alternate constructor for default (English Gregorian) clock beginning at default start time:
-        
-    #         00:00 Sunday, January 1, 1 (A.D.)
-    #     '''
-    #     return cls(DEFAULT_FORMATTING)
-
-
-    @classmethod
-    def from_timestamp(cls, timestamp: CalendarTimestamp) -> 'GameClock':
-        '''
-        Alternate constructor for default clock (English Gregorian) beginning at given start time.
-
-        Params:     
-            timestamp   ::  dict adhering to the paradigm of the CalendarTimestamp class
-        '''
-        return cls(DEFAULT_FORMATTING, timestamp)
 
 
     @property
@@ -159,7 +140,7 @@ class GameClock:
 
         In the default formatting, this is equivalent to:
 
-            00:00 Sunday, January 1, 1 (A.D.)
+            00:00 Sunday, January 1, 1 
 
         Parameters
         ----------

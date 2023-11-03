@@ -111,37 +111,6 @@ class CalendarTimestamp(TypedDict):
     day_of_week: str
     leap_year: int
 
-doc = '''Setup:
-
-            from enum import auto
-            from gameclock import GameClock, Days, Months, CalendarFormatting
-
-            values = {'leap_month':'winter', 
-                      'leap_year_frequency': 3, 
-                      'minutes_in_hour': 100, 
-                      'hours_in_day': 14, 
-                      'days_in_month':{'spring':28, 
-                                       'summer':28, 
-                                       'fall':28, 
-                                       'winter':28}
-                        }
-            class FantasyGameMonths(Months):
-                SPRING = auto()
-                SUMMER = auto()
-                FALL = auto()
-                WINTER = auto()
-
-            class FantasyGameDays(Days):
-                MORDOCH = auto()
-                KELLENCRAT = auto()
-                DRAGGENTHAR = auto()
-
-            cal = CalendarFormatting(values, FantasyGameDays, FantasyGameMonths)
-            starting_time = {...}
-            clock = GameClock(cal, starting_time)
-
-            while True:
-                clock.tick()'''
 
 @dataclass
 class CalendarFormatting():
