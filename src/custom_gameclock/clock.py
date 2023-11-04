@@ -61,10 +61,11 @@ class GameClock:
     configuration.
     '''
     
-    # /-------------------------------NOTES----------------------------------/
+    # /----------------------NOTES FOR NEXT VERSION--------------------------/
     #
     # TODO: The clock requires a 'leap month' even if leap_year_frequency is
-    # set to 0 (i.e. no leap years). 
+    # set to 0 (i.e. no leap years). Changing this means rewriting two 
+    # methods: __get_month_length and __next_day
     #
     # TODO: The class can calculate the minutes from a timestamp, but not a
     # timestamp from the minutes.
@@ -112,7 +113,6 @@ class GameClock:
             vcb.DAY_OF_MONTH: 1,
             vcb.YEAR: 1,
             vcb.LEAP_YEAR: 0,
-            vcb.LEAP_YEAR_FREQUENCY: 1,
             vcb.MONTH: self.__constants.months_in_year.define_first()
         }
         return cast(CalendarTimestamp, timestamp)
@@ -123,9 +123,7 @@ class GameClock:
         Use the formatting to generate a timestamp from the given number of minutes.
         '''        
         minutes +=1 
-        # placeholder
-
-
+        # placeholder to be filled in in next version.
         return self.default_time
 
 
@@ -188,11 +186,11 @@ class GameClock:
             offset = 1 * hrs * mins
         total += leap_days - offset
 
-        # Calculate centurial leap years (skip leap year every 100 years, but 
-        # not every 400 years).
+        # Calculate centurial leap years (skip leap year 
+        # every 100 years, but not every 400 years).
         subtract = 0
         add = 0
-        if time[vcb.YEAR] / 100 > 1:
+        if time[vcb.YEAR] / 100 > 1: 
             subtract = time[vcb.YEAR] // 100 * hrs * mins
         if time[vcb.YEAR] / 400 > 1:
             add = time[vcb.YEAR] // 400 * hrs * mins
@@ -233,7 +231,7 @@ class GameClock:
 
     def get_alarm(self, minutes: int) -> int:
         '''
-        Return the current absolute number of minutes + the given timer.
+        Return the current absolute number of minutes + the minutes in the given timer.
         '''
         return self.get_total_minutes(self.current_time) + minutes
 
