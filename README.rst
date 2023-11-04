@@ -45,7 +45,7 @@ The clock starts at a default time in the example above, but we can pass a dicti
 calendar formatting, like above, then the starting timestamp must be passed as a keyword argument. 
 
 .. code:: Python
-    
+
     from custom_gameclock import GameClock
     clock = GameClock(starting_time={'month':'january', 
                                      'day_of_month':4, 
@@ -89,7 +89,7 @@ Timers
 ++++++
 
 The clock can also set an alarm for a certain number of ticks from the current time. Use the ``GameClock().get_alarm()`` method to 
-get an alarm, and pass the alarm (dictionary timestamp) to ``GameClock().alarm_done()`` to test whether the alarm is done yet.
+get an alarm, and pass the alarm (integer) to ``GameClock().alarm_done()`` to test whether the alarm is done yet.
 
 The alarms work by calculating the total number of minutes elapsed since the clock's default time and comparing them between two timestamps.
 If you want to convert a timestamp to total minutes, you can pass a properly-formatted timestamp to the ``GameClock().get_total_minutes(timestamp)`` method too.
