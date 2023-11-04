@@ -49,6 +49,7 @@ a plain dictionary timestamp is returned from the ``GameClock().current_time`` p
 
 .. code:: Python
 
+
     >>> from custom_gameclock import GameClock
     >>> x = GameClock()
     >>> x.prettytime
@@ -102,8 +103,10 @@ The class checks that the names of the months are the same as those in the ``Mon
 
 .. code:: Python
 
+
     from enum import auto
     from gameclock import GameClock, Days, Months, CalendarFormatting
+
 
     values = {'leap_month': 'winter', 
               'leap_year_frequency': 3, 
@@ -115,18 +118,22 @@ The class checks that the names of the months are the same as those in the ``Mon
                                'winter': 28}
                 }
 
+
     class FantasyGameMonths(Months):
         SPRING = auto()
         SUMMER = auto()
         FALL = auto()
         WINTER = auto()
 
+
     class FantasyGameDays(Days):
         MORDOCH = auto()
         KELLENCRAT = auto()
         DRAGGENTHAR = auto()
 
+
     cal = CalendarFormatting(values, FantasyGameDays, FantasyGameMonths)
+
 
     starting_time = {'minutes': 66, 
                      'hours': 12, 
