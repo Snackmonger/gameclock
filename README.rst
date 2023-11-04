@@ -48,6 +48,7 @@ Nicely-formatted time is returned from the ``GameClock().prettytime`` property, 
 a plain dictionary timestamp is returned from the ``GameClock().current_time`` property:
 
 .. code:: Python
+
     >>> from custom_gameclock import GameClock
     >>> x = GameClock()
     >>> x.prettytime
@@ -65,6 +66,7 @@ The alarms work by calculating the total number of minutes elapsed since the clo
 If you want to convert a timestamp to total minutes, you can pass a properly-formatted timestamp to the ``GameClock().get_total_minutes(timestamp)`` method too.
 
 .. code:: Python
+
     >>> from custom_gameclock import GameClock
     >>> x = GameClock()
     >>> alarm = x.get_alarm(50000)
@@ -77,7 +79,7 @@ If you want to convert a timestamp to total minutes, you can pass a properly-for
     50000
 
 Note: The calculation of total minutes assumes that the planet skips a leap year every 100 years, but not every 400 years. This is borrowed from the Gregorian calendar
-and is hard-coded into the calculation. Any custom calendar that uses leap years will observe this pattern. If you want to avoid using 
+and is hard-coded into the calculation (for now). Any custom calendar that uses leap years will observe this pattern. If you want to avoid using 
 leap years entirely, simply set ``leap_year_frequency`` to ``0`` in the dictionary of calendar limits wrapped in the ``CalendarFormatting`` class, outlined below.
 
 
@@ -85,7 +87,7 @@ Custom Calendars
 ~~~~~~~~~~~~~~~~
 
 Custom calendar systems are supported by passing an instance of the ``CalendarFormatting`` class when initializing
-the clock.
+the clock. This class serves as a wrapper (with a little validation) for the basic constants the clock uses.
 
 Days and Months
 +++++++++++++++
@@ -99,8 +101,10 @@ This dictionary defines the points at which different units of time will roll ov
 The class checks that the names of the months are the same as those in the ``Months`` enum, and that the leap month is a valid name.
 
 .. code:: Python
+
     from enum import auto
     from gameclock import GameClock, Days, Months, CalendarFormatting
+
     values = {'leap_month': 'winter', 
               'leap_year_frequency': 3, 
               'minutes_in_hour': 100, 
@@ -110,16 +114,20 @@ The class checks that the names of the months are the same as those in the ``Mon
                                'fall': 28, 
                                'winter': 28}
                 }
+
     class FantasyGameMonths(Months):
         SPRING = auto()
         SUMMER = auto()
         FALL = auto()
         WINTER = auto()
+
     class FantasyGameDays(Days):
         MORDOCH = auto()
         KELLENCRAT = auto()
         DRAGGENTHAR = auto()
+
     cal = CalendarFormatting(values, FantasyGameDays, FantasyGameMonths)
+
     starting_time = {'minutes': 66, 
                      'hours': 12, 
                      'year': 33, 
@@ -127,6 +135,7 @@ The class checks that the names of the months are the same as those in the ``Mon
                      'day_of_month': 24, 
                      'day_of_week': 'draggenthar', 
                      'leap_year': 3}
+
     clock = GameClock(cal, starting_time)
 
 Now the clock is formatted to use the custom calendar:
