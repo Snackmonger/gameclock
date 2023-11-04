@@ -70,6 +70,10 @@ class GameClock:
     # TODO: The class can calculate the minutes from a timestamp, but not a
     # timestamp from the minutes.
     #
+    # Probably the CalendarTimestamp would work well as a dataclass, but is a
+    # plain dict easier for a user to deal with? Not sure that this needs to 
+    # be changed.
+    #
     # /----------------------------------------------------------------------/
 
     def __init__(self,

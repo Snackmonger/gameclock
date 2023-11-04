@@ -38,8 +38,36 @@ If the user doesn't need a customized calendar, then ``GameClock()`` will return
         print(clock.prettytime)
         time.sleep(Speeds.NORMAL)
 
-This example uses the standard library ``time`` to call ``tick()`` at regular intervals (in a precariously uncontrolled loop), but the user can customize the main loop in whatever
+This example uses the standard library ``time`` to call ``GameClock().tick()`` at regular intervals (in a precariously uncontrolled loop), but the user can customize the main loop in whatever
 way is desired. The included ``Speeds`` enum has some suggestions in miliseconds.
+
+The clock starts at a default time in the example above, but we can pass a dictionary timestamp during initialization to set the starting time. If we're using the default
+calendar formatting, like above, then the starting timestamp must be passed as a keyword argument. 
+
+.. code:: Python
+    from custom_gameclock import GameClock
+    clock = GameClock(starting_time={'month':'january', 
+                                     'day_of_month':4, 
+                                     'day_of_week':'monday',
+                                     'minutes': 33,
+                                     'hours': 6,
+                                     'year': 1995
+                                     'leap_year': 3})
+
+Oops! We set the clock to a date that doesn't exist! If we want to change the clock's time after initialization, we can use the ``GameClock().set_time`` method:
+
+.. code:: Python
+
+    clock.set_time({'month':'january', 
+                    'day_of_month':4, 
+                    'day_of_week':'monday',
+                    'minutes': 33,
+                    'hours': 6,
+                    'year': 1993
+                    'leap_year': 3})
+
+If we had kept the starting time we originally set, the clock itself would have worked fine, but it would have been unable to resolve timestamps into integers and back again properly.
+This means that the timing system (see further below) would have generated incorrect alarms.
 
 Display
 +++++++
@@ -48,7 +76,6 @@ Nicely-formatted time is returned from the ``GameClock().prettytime`` property, 
 a plain dictionary timestamp is returned from the ``GameClock().current_time`` property:
 
 .. code:: Python
-
 
     >>> from custom_gameclock import GameClock
     >>> x = GameClock()
