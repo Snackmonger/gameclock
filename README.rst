@@ -35,13 +35,14 @@ If the user doesn't need a customized calendar, then ``GameClock()`` will return
     running = True
     while running:
         clock.tick()
+        print(clock.prettytime)
         time.sleep(Speeds.NORMAL)
 
-This example uses the standard library ``time``, but the user can customize the main loop in whatever
-way is desired.
+This example uses the standard library ``time`` to call ``tick()`` at regular intervals (in a precariously uncontrolled loop), but the user can customize the main loop in whatever
+way is desired. The included ``Speeds`` enum has some suggestions in miliseconds.
 
 Display
-~~~~~~~
++++++++
 
 Nicely-formatted time is returned from the ``GameClock().prettytime`` property, and
 a plain dictionary timestamp is returned from the ``GameClock().current_time`` property:
@@ -54,6 +55,32 @@ a plain dictionary timestamp is returned from the ``GameClock().current_time`` p
     >>> x.current_time
     {'minutes': 0, 'hours': 0, 'day_of_week': 'sunday', 'month': 'january', 'day_of_month': 1, 'year': 1, 'leap_year': 0}
 
+Timers
+++++++
+
+The clock can also set an alarm for a certain number of ticks from the current time. Use the ``GameClock().get_alarm()`` method to 
+get an alarm, and use ``GameClock().alarm_done()`` to test whether the alarm is done yet.
+
+The alarms work by calculating the total number of minutes elapsed since the clock's default time and comparing them between two timestamps.
+If you want to convert a timestamp to total minutes, you can pass a properly-formatted timestamp to the ``GameClock().get_total_minutes(timestamp)`` method too.
+
+.. code:: Python
+    >>> from custom_gameclock import GameClock
+    >>> x = GameClock()
+    >>> alarm = x.get_alarm(50000)
+    >>> while x.alarm_done(alarm) is False:
+    ...     x.tick()
+    >>> print('Alarm done!', x.prettytime)
+    Alarm done! 17:20 - Saturday, February 4, 1
+    >>> timestamp = x.current_time
+    >>> x.get_total_minutes(timestamp)
+    50000
+
+Note: The calculation of total minutes assumes that the planet skips a leap year every 100 years, but not every 400 years. This is borrowed from the Gregorian calendar
+and is hard-coded into the calculation. Any custom calendar that uses leap years will observe this pattern. If you want to avoid using 
+leap years entirely, simply set ``leap_year_frequency`` to ``0`` in the dictionary of calendar limits wrapped in the ``CalendarFormatting`` class, outlined below.
+
+
 Custom Calendars
 ~~~~~~~~~~~~~~~~
 
@@ -63,7 +90,7 @@ the clock.
 Days and Months
 +++++++++++++++
 The ``Days`` and ``Months`` enums are used to define the names of the days and months that the calendar will use.
-Any names can be used, as long as they are unique in their enum.
+Any names can be used, as long as they are unique in their enum. 
 
 CalendarFormatting
 ++++++++++++++++++

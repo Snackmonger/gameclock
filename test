@@ -1,3 +1,9 @@
-from src.custom_gameclock import GameClock
-x = GameClock()
-print(x.prettytime)
+import time
+from custom_gameclock import GameClock, Speeds
+
+clock = GameClock()
+running = True
+while running:
+    clock.tick()
+    print(clock.prettytime)
+    time.sleep(Speeds.NORMAL)
