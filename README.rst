@@ -45,6 +45,7 @@ The clock starts at a default time in the example above, but we can pass a dicti
 calendar formatting, like above, then the starting timestamp must be passed as a keyword argument. 
 
 .. code:: Python
+    
     from custom_gameclock import GameClock
     clock = GameClock(starting_time={'month':'january', 
                                      'day_of_month':4, 
