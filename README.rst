@@ -7,7 +7,7 @@ Custom Game Clock
 Installation
 ------------
 
-``py -m pip install custom_gameclock``
+``py -m pip install custom-gameclock``
 
 
 Description
